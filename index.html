@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GemFinds - Real finds. No Noise.</title>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #120E3D;
+            --primary-teal: #10A3A4;
+            --accent-purple: #6347D1;
+            --accent-yellow: #F4B223;
+            --text-light: #FFFFFF;
+            --text-gray: #A09DB1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Geometric background accents reminiscent of the app splash screen */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+            opacity: 0.6;
+        }
+        .circle-1 { top: -100px; left: -100px; width: 400px; height: 400px; background: var(--primary-teal); }
+        .circle-2 { bottom: 20%; right: -150px; width: 500px; height: 500px; background: var(--accent-purple); }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .btn {
+            background-color: var(--primary-teal);
+            color: var(--text-light);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 163, 164, 0.4);
+        }
+
+        /* Hero Section */
+        header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 5% 8rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-mockup {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-frame {
+            width: 320px;
+            height: 640px;
+            border: 10px solid #2A2659;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            background: #000;
+            position: relative;
+        }
+
+        /* Slideshow Animation for Mockup to showcase the screenshots */
+        .phone-slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            animation: slideAnimation 12s infinite ease-in-out;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Fallback designs utilizing the styling text from your images */
+        .slide-1 { 
+            background: linear-gradient(rgba(18, 14, 61, 0.2), rgba(18, 14, 61, 0.85)), url('https://images.unsplash.com/photo-1542704126-6a9b17fd96e2?auto=format&fit=crop&w=500&q=80'); 
+            /* Alternate background to mimic the Nigerian flag vibe if preferred */
+        }
+        .slide-2 { 
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=80'); 
+        }
+        .slide-3 {
+            background: var(--bg-dark);
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes slideAnimation {
+            0%, 28% { transform: translateX(0); }
+            33%, 61% { transform: translateX(-33.33%); }
+            66%, 95% { transform: translateX(-66.66%); }
+        }
+
+        /* Features Section */
+        .features {
+            background-color: #181448;
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+        }
+
+        /* Footer / CTA */
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5% 3rem 5%;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #1C1754 0%, #251F66 100%);
+            padding: 4rem 2rem;
+            border-radius: 32px;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-gray);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 2rem;
+            }
+            .hero-content p {
+                margin: 0 auto 2.5rem auto;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+
+    <nav>
+        <div class="logo-container">
+            <svg width="40" height="40" viewBox="0 0 130 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M65 160C65 160 130 98.75 130 65C130 29.1015 100.899 0 65 0C29.1015 0 0 29.1015 0 65C0 98.75 65 160 65 160Z" fill="#6347D1"/>
+                <path d="M65 25L95 50H35L65 25Z" fill="#FFF" opacity="0.9"/>
+                <path d="M35 50L65 90L15 50H35Z" fill="#A5F3FC"/>
+                <path d="M95 50L65 90L115 50H95Z" fill="#22D3EE"/>
+                <path d="M35 50L65 90L65 50H35Z" fill="#38BDF8"/>
+            </svg>
+            <span class="logo-text">GemFinds</span>
+        </div>
+        <a href="#download" class="btn">Download App</a>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>Real Finds.<br><span style="color: var(--primary-teal);">No Noise.</span></h1>
+            <p>Discover places, services, and local experiences around you that match your exact mood, style, and budget all in one beautiful ecosystem.</p>
+            <a href="#download" class="btn">Get Started <i data-lucide="arrow-right"></i></a>
+        </div>
+        
+        <div class="hero-mockup">
+            <div class="phone-frame">
+                <div class="phone-slider">
+                    <div class="slide slide-1">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Navigate your city Like Pro</h3>
+                        <p style="font-size: 0.85rem; color: #E2E8F0;">From hidden gems to top-rated spots, find exactly what you need without endless searching.</p>
+                    </div>
+                    <div class="slide slide-2">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Find What Fits your vibe</h3>
+                        <p style="font-size: 0.85rem; color: #E2E8F0;">Discover places, services & experiences around that match your mood, style & budget.</p>
+                    </div>
+                    <div class="slide slide-3">
+                        <svg width="80" height="95" viewBox="0 0 130 160" fill="none">
+                            <path d="M65 160C65 160 130 98.75 130 65C130 29.1015 100.899 0 65 0C29.1015 0 0 29.1015 0 65C0 98.75 65 160 65 160Z" fill="#6347D1"/>
+                            <path d="M65 25L95 50H35L65 25Z" fill="#FFF"/>
+                            <path d="M35 50L65 90L15 50H35Z" fill="#A5F3FC"/>
+                            <path d="M95 50L65 90L115 50H95Z" fill="#22D3EE"/>
+                        </svg>
+                        <h2 style="margin-top:1rem; font-size: 1.8rem;">GemFinds</h2>
+                        <span style="font-size: 0.9rem; color: var(--text-gray);">Real finds . No Noise</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-wrapper" style="background: rgba(16, 163, 164, 0.15); color: var(--primary-teal);">
+                    <i data-lucide="compass"></i>
+                </div>
+                <h3>Navigate Like a Pro</h3>
+                <p>Skip the confusing guides. Map out your city adventures flawlessly with pinpointed local curation built for real explorers.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-wrapper" style="background: rgba(99, 71, 209, 0.15); color: var(--accent-purple);">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <h3>Match Your Vibe</h3>
+                <p>Filter spots dynamically by your mood, distinct aesthetics, lifestyle preferences, and specific budget parameters instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-wrapper" style="background: rgba(244, 178, 35, 0.15); color: var(--accent-yellow);">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h3>Zero Noise Filtering</h3>
+                <p>No bloated reviews or sponsored filler cluttering your feed. Just curated, authentic gems verified by our community grid.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="download">
+        <div class="cta-box">
+            <h2>Ready to find your next gem?</h2>
+            <p style="color: var(--text-gray); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Get access to premium curations and curate your perfect day out. Download GemFinds today.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" style="background: #000;"><i data-lucide="smartphone"></i> App Store</button>
+                <button class="btn"><i data-lucide="play"></i> Google Play</button>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 GemFinds Technologies Inc. All rights reserved.</p>
+            <p>Made with 💎 for local explorers.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
