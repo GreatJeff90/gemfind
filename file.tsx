@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1427,4 +1427,4 @@ const statsEl = document.querySelector('.hero-stats');
 if(statsEl) statObs.observe(statsEl);
 </script>
 </body>
-</html> -->
+</html>
